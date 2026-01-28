@@ -1,0 +1,6 @@
+# MyBatis-Plus 配置
+mybatis-plus:
+  type-aliases-package: com.camping.life.**.domain # 扫描所有模块的实体类
+  configuration:
+    map-underscore-to-camel-case: true # 数据库下划线字段 → Java 驼峰命名字段（自动转换）
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 控制台打印 SQL 日志（开发环境推荐）

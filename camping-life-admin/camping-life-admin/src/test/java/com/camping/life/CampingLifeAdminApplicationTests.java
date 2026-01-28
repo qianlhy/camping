@@ -1,0 +1,13 @@
+package com.camping.life;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class CampingLifeAdminApplicationTests {
+
+    @Test
+    void contextLoads() {
+    }
+
+}
