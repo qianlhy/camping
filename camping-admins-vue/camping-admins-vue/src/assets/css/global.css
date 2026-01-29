@@ -1,0 +1,20 @@
+/* src/assets/css/global.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: "Microsoft YaHei", sans-serif;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .el-card {
+    border-radius: 4px;
+  }
+  
+  .el-input__wrapper:focus-within {
+    box-shadow: 0 0 0 2px rgba(25, 137, 250, 0.2) !important;
+  }

@@ -1,14 +1,20 @@
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    },
-    {
-      "path": "./tsconfig.app.json"
-    },
-    {
-      "path": "./tsconfig.vitest.json"
+    "files": [],
+    "references": [
+      {
+        "path": "./tsconfig.node.json"
+      },
+      {
+        "path": "./tsconfig.app.json"
+      },
+      {
+        "path": "./tsconfig.vitest.json"
+      }
+    ],
+    "compilerOptions": {
+      "baseUrl": ".", // 配置基础路径，以当前 tsconfig.json 文件所在目录为根
+      "paths": {
+        "@/*": ["src/*"] // 映射 @/ 到 src/ 目录，解决路径别名解析问题
+      }
     }
-  ]
-}
+  }
