@@ -1,6 +1,6 @@
 // src/store/adminUser.ts
 import { adminLogin, getAdminInfo } from '@/api/login';
-import { AdminInfoData, LoginFormData, LoginResponseData } from '@/types/login';
+import type { AdminInfoData, LoginFormData, LoginResponseData } from '@/types/login';
 import { ElMessage } from 'element-plus';
 import { defineStore } from 'pinia';
 

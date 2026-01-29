@@ -1,8 +1,9 @@
 // src/utils/request.ts
-import { useAdminUserStore } from '@/store/adminUser';
-import { ApiResponse } from '@/types/api';
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios from 'axios';
 import { ElMessage } from 'element-plus';
+import { useAdminUserStore } from '../store/adminUser';
+import type { ApiResponse } from '../types/api';
 
 // 创建 axios 实例
 const service: AxiosInstance = axios.create({

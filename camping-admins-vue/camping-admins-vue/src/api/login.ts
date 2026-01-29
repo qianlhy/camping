@@ -1,8 +1,8 @@
 // src/api/login.ts
-import { ApiResponse } from '@/types/api';
-import { AdminInfoData, LoginFormData, LoginResponseData } from '@/types/login';
+import type { AdminInfoData, LoginFormData, LoginResponseData } from '@/types/login';
 import request from '@/utils/request';
 import qs from 'qs';
+import type { ApiResponse } from '../types/api';
 
 /**
  * 管理员登录接口

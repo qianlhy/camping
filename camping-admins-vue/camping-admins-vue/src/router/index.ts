@@ -2,11 +2,13 @@
 // 导入布局和页面
 import MainLayout from '@/layouts/MainLayout.vue';
 import { useAdminUserStore } from '@/store/adminUser';
-import { RouteMeta } from '@/types/router';
+import type { RouteMeta } from '@/types/router';
 import Dashboard from '@/views/dashboard/index.vue';
 import Login from '@/views/login/index.vue';
 import { ElMessage } from 'element-plus';
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
+import type { RouteRecordRaw } from 'vue-router';
+
 
 
 // 定义路由规则（补充 RouteRecordRaw 类型约束，meta 遵循 RouteMeta 类型）
