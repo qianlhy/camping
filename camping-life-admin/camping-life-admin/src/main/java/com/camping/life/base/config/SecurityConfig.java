@@ -4,12 +4,17 @@ import com.camping.life.admin.service.AdminUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 /**
  * Spring Security 全局核心配置类（全局通用，放在 base 模块）
@@ -42,12 +47,31 @@ public class SecurityConfig {
     }
 
     /**
-     * 3. 核心安全过滤链（配置登录、权限、退出等核心规则）
+     * 3. 配置 CORS 源
+     */
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.addAllowedOrigin("http://localhost:5173");
+        configuration.setAllowCredentials(true);
+        configuration.addAllowedHeader("*");
+        configuration.addAllowedMethod("*");
+        configuration.setMaxAge(3600L);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+
+    /**
+     * 4. 核心安全过滤链（配置登录、权限、退出等核心规则）
      * 贴合露营项目：保护 /admin/** 接口，放开 /api/** 接口（小程序端）
      */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                // 启用 CORS
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 // 关闭 CSRF 防护（开发环境可关闭，生产环境建议开启并配置白名单）
                 .csrf(csrf -> csrf.disable())
 
@@ -55,10 +79,14 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // ① 小程序端接口（/api/**）：允许匿名访问（无需登录，后续可添加 JWT 认证）
                         .requestMatchers("/api/**").permitAll()
+                        // 临时放行 /admin/index 用于测试
+                        .requestMatchers("/admin/index").permitAll()
+//                        .antMatchers(HttpMethod.GET, "/admin/index").permitAll() // 放行 GET 方法
+//                        .antMatchers(HttpMethod.POST, "/admin/index").permitAll() // 放行 POST 方法
                         // ② 管理端接口（/admin/**）：必须是 ADMIN 角色才能访问（保护后台）
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         // ③ 登录页、静态资源：允许匿名访问
-                        .requestMatchers("/login", "/static/**", "/templates/**").permitAll()
+                        .requestMatchers("/login", "/static/**", "/templates/**", "/error").permitAll()
                         // ④ 其他所有请求：必须登录后才能访问
                         .anyRequest().authenticated()
                 )

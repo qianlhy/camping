@@ -42,7 +42,7 @@ export const useAdminUserStore = defineStore('adminUser', {
         localStorage.setItem('adminToken', tokenData.token);
 
         // 登录成功后，获取管理员详细信息
-        await this.fetchAdminInfo();
+        // await this.fetchAdminInfo();
 
         ElMessage.success('登录成功！');
       } catch (error) {

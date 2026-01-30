@@ -16,7 +16,7 @@ public class AdminIndexController {
     /**W
      * 管理端首页接口（需要 ADMformLogin(form -> form.loginPage("/login"))IN 角色才能访问）
      */
-    @GetMapping("/index")
+    @RequestMapping("/index")
     public ResultUtil<String> adminIndex() {
         return ResultUtil.success("欢迎进入露营小程序管理后台！");
     }

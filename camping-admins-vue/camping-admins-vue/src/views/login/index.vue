@@ -112,7 +112,7 @@ const handleLogin = async (): Promise<void> => {
 
     // 第三步：登录成功，跳转至目标页面（优先跳转之前访问的页面，否则跳转到仪表盘）
     const currentRoute = router.currentRoute as RouteLocationNormalized;
-    const redirect = currentRoute.query.redirect as string || '/dashboard';
+    const redirect = currentRoute?.query?.redirect as string || '/dashboard';
     await router.push(redirect);
   } catch (error) {
     console.error('登录失败：', error);

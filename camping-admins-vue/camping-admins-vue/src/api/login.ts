@@ -11,7 +11,7 @@ import type { ApiResponse } from '../types/api';
  */
 export const adminLogin = (data: LoginFormData): Promise<ApiResponse<LoginResponseData>> => {
   return request<LoginResponseData>({
-    url: '/login',
+    url: '/admin/index',
     method: 'post',
     data: qs.stringify(data), // 转换为 x-www-form-urlencoded 格式（Spring Security 要求）
   });
@@ -23,7 +23,7 @@ export const adminLogin = (data: LoginFormData): Promise<ApiResponse<LoginRespon
  */
 export const getAdminInfo = (): Promise<ApiResponse<AdminInfoData>> => {
   return request<AdminInfoData>({
-    url: '/info',
-    method: 'get',
+    url: '/admin/info',
+    method: 'post',
   });
 };
